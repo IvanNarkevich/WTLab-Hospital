@@ -1,0 +1,5 @@
+2019-11-17 14:29:48,925 INFO mai.bsu.Main [main] Запуск приложения...
+2019-11-17 14:29:49,698 INFO mai.bsu.ser.XSDValidator [main] Валидация прошла успешно.
+2019-11-17 14:29:49,816 INFO mai.bsu.par.SAXHandler [main] Начало парсинга.
+2019-11-17 14:29:49,948 INFO mai.bsu.par.SAXHandler [main] Окончание парсинга.
+2019-11-17 14:29:49,963 INFO mai.bsu.ser.MigrationService [main] Получение экземпляра сервиса миграции

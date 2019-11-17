@@ -1,0 +1,59 @@
+<hospital>
+	<departments>
+		<department id="1">
+		<name>Трансплантологическое отделение</name>
+		</department>
+		<department id="2">
+		<name>Травмотологическое отделение</name>
+		</department>
+	</departments>
+	<doctors>
+		<doctor id="1">
+		<name>Иванов Иван Иванович</name>
+		<birthdate>18.05.1978</birthdate>
+		<departmentID>1</departmentID>
+		</doctor>
+		<doctor id="2">
+		<name>Петров Пётр Петрович</name>
+		<birthdate>11.11.1982</birthdate>
+		<departmentID>1</departmentID>
+		</doctor>
+		<doctor id="3">
+		<name>Ильина Наталья Игоревна</name>
+		<birthdate>01.12.1979</birthdate>
+		<departmentID>2</departmentID>
+		</doctor>
+	</doctors>
+	<nurses>
+		<nurse id="1">
+		<name>Александрова Екатерина Ивановна</name>
+		<birthdate>23.06.1992</birthdate>
+		<departmentID>1</departmentID>
+		</nurse>
+		<nurse id="2">
+		<name>Шульгина Дарья Сергеевна</name>
+		<birthdate>30.01.1990</birthdate>
+		<departmentID>2</departmentID>
+		</nurse>
+	</nurses>
+	<patients>
+		<patient id="1">
+		<name>Алексеев Игорь Андреевич</name>
+		<birthdate>23.02.1952</birthdate>
+        	<admissiondate>03.11.2019</admissiondate>
+        	<diagnosis>Инфаркт миокарда</diagnosis> 
+        	<treatment>Пересадка сердца</treatment>
+		<departmentID>1</departmentID>
+		<doctorID>1</doctorID>
+		</patient>
+		<patient id="2">
+		<name>Сидоров Никита Алексеевич</name>
+		<birthdate>10.01.1950</birthdate>
+        	<admissiondate>09.11.2019</admissiondate>
+        	<diagnosis>Перелом шейки бедра</diagnosis> 
+        	<treatment>Накладывание гипса сроком на 1 месяц</treatment>
+		<departmentID>2</departmentID>
+		<doctorID>3</doctorID>
+		</patient>
+	</patients>
+</hospital>
