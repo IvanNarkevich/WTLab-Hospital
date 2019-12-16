@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="hospital">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="departments">
+		<xsd:complexType>
+      			<xsd:sequence>
+        			<xsd:element name="department" minOccurs="0" maxOccurs="unbounded">
+    					<xsd:complexType>
+      						<xsd:sequence>
+        						<xsd:element name="name" type="xsd:string"/>
+      						</xsd:sequence>
+      					<xsd:attribute name="id" type="xsd:int" use="required"/>
+    					</xsd:complexType>
+  				</xsd:element>
+      			</xsd:sequence>
+    		</xsd:complexType>
+  	</xsd:element>
+        <xsd:element name="doctors">
+		<xsd:complexType>
+      			<xsd:sequence>
+        			<xsd:element name="doctor" minOccurs="0" maxOccurs="unbounded">
+    					<xsd:complexType>
+      						<xsd:sequence>
+        						<xsd:element name="name" type="xsd:string"/>
+        						<xsd:element name="birthdate" type="DateType"/>
+        						<xsd:element name="departmentID" type="xsd:int"/>
+      						</xsd:sequence>
+      					<xsd:attribute name="id" type="xsd:int" use="required"/>
+    					</xsd:complexType>
+  				</xsd:element>
+      			</xsd:sequence>
+    		</xsd:complexType>
+  	</xsd:element>		
+        <xsd:element name="nurses">
+		<xsd:complexType>
+      			<xsd:sequence>
+        			<xsd:element name="nurse" minOccurs="0" maxOccurs="unbounded">
+    					<xsd:complexType>
+      						<xsd:sequence>
+        						<xsd:element name="name" type="xsd:string"/>
+        						<xsd:element name="birthdate" type="DateType"/>
+        						<xsd:element name="departmentID" type="xsd:int"/>
+      						</xsd:sequence>
+      					<xsd:attribute name="id" type="xsd:int" use="required"/>
+    					</xsd:complexType>
+  				</xsd:element>
+      			</xsd:sequence>
+    		</xsd:complexType>
+  	</xsd:element>
+        <xsd:element name="patients">
+		<xsd:complexType>
+      			<xsd:sequence>
+        			<xsd:element name="patient" minOccurs="0" maxOccurs="unbounded">
+    					<xsd:complexType>
+      						<xsd:sequence>
+        						<xsd:element name="name" type="xsd:string"/>
+        						<xsd:element name="birthdate" type="DateType"/>
+        						<xsd:element name="admissiondate" type="DateType"/>
+        						<xsd:element name="diagnosis" type="xsd:string"/>
+        						<xsd:element name="treatment" type="xsd:string"/>
+        						<xsd:element name="departmentID" type="xsd:int"/>
+        						<xsd:element name="doctorID" type="xsd:int"/>
+      						</xsd:sequence>
+      					<xsd:attribute name="id" type="xsd:int" use="required"/>
+    					</xsd:complexType>
+  				</xsd:element>
+      			</xsd:sequence>
+    		</xsd:complexType>
+  	</xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+    <xsd:simpleType name="DateType">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="(0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.](19|20)\d\d"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>
