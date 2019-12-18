@@ -29,7 +29,7 @@ public class StAXHandler {
             hospital = process(reader);
 
         } catch (XMLStreamException e) {
-            logger.error("Parse error", e);
+            logger.error("Ошибка парсинга", e);
         }
         return hospital;
     }
@@ -44,51 +44,34 @@ public class StAXHandler {
         Nurse nurse = null;
         Patient patient = null;
 
-        Hospital hospital = null;
+        Hospital hospital = new Hospital();
 
         String elementName = null;
-        DepartmentTag departmentTag = DepartmentTag.NONE;
-        DoctorTag doctorTag = DoctorTag.NONE;
-        NurseTag nurseTag = NurseTag.NONE;
-        PatientTag patientTag = PatientTag.NONE;
         while (reader.hasNext()) {
             int type = reader.next();
             switch (type) {
                 case XMLStreamConstants.START_ELEMENT:
-                    switch (entityTag) {
-                        case NONE:
-                            entityTag = EntityTag.valueOf(reader.getLocalName().toUpperCase());
-                            hospital = new Hospital();
-                            break;
-                        case HOSPITAL:
-                            break;
-                        case DEPARTMENTS:
+                    elementName = reader.getLocalName().toUpperCase();
+                    switch (elementName) {
+                        case "DEPARTMENT":
                             department = new Department();
                             department.setID(Integer.parseInt(reader.getAttributeValue(null, "id")));
+                            entityTag = EntityTag.DEPARTMENT;
                             break;
-                        case DEPARTMENT:
-                            departmentTag = DepartmentTag.valueOf(reader.getLocalName().toUpperCase());
-                            break;
-                        case DOCTORS:
+                        case "DOCTOR":
                             doctor = new Doctor();
                             doctor.setID(Integer.parseInt(reader.getAttributeValue(null, "id")));
+                            entityTag = EntityTag.DOCTOR;
                             break;
-                        case DOCTOR:
-                            doctorTag = DoctorTag.valueOf(reader.getLocalName().toUpperCase());
-                            break;
-                        case NURSES:
+                        case "NURSE":
                             nurse = new Nurse();
                             nurse.setID(Integer.parseInt(reader.getAttributeValue(null, "id")));
+                            entityTag = EntityTag.NURSE;
                             break;
-                        case NURSE:
-                            nurseTag = NurseTag.valueOf(reader.getLocalName().toUpperCase());
-                            break;
-                        case PATIENTS:
+                        case "PATIENT":
                             patient = new Patient();
                             patient.setID(Integer.parseInt(reader.getAttributeValue(null, "id")));
-                            break;
-                        case PATIENT:
-                            patientTag = PatientTag.valueOf(reader.getLocalName().toUpperCase());
+                            entityTag = EntityTag.PATIENT;
                             break;
                     }
                     break;
@@ -99,62 +82,62 @@ public class StAXHandler {
                     }
                     switch (entityTag) {
                         case DEPARTMENT: {
-                            switch (departmentTag) {
-                                case NAME:
+                            switch (elementName) {
+                                case "NAME":
                                     department.setName(text.toString());
                                     break;
                             }
                         }
                         break;
                         case DOCTOR: {
-                            switch (doctorTag) {
-                                case NAME:
+                            switch (elementName) {
+                                case "NAME":
                                     doctor.setName(text.toString());
                                     break;
-                                case BIRTHDATE:
+                                case "BIRTHDATE":
                                     doctor.setBirthDate(text.toString());
                                     break;
-                                case DEPARTMENTID:
+                                case "DEPARTMENTID":
                                     doctor.setDepartmentID(Integer.parseInt(text.toString()));
                                     break;
                             }
                         }
                         break;
                         case NURSE: {
-                            switch (nurseTag) {
-                                case NAME:
+                            switch (elementName) {
+                                case "NAME":
                                     nurse.setName(text.toString());
                                     break;
-                                case BIRTHDATE:
+                                case "BIRTHDATE":
                                     nurse.setBirthDate(text.toString());
                                     break;
-                                case DEPARTMENTID:
+                                case "DEPARTMENTID":
                                     nurse.setDepartmentID(Integer.parseInt(text.toString()));
                                     break;
                             }
                             break;
                         }
                         case PATIENT: {
-                            switch (patientTag) {
-                                case NAME:
+                            switch (elementName) {
+                                case "NAME":
                                     patient.setName(text.toString());
                                     break;
-                                case BIRTHDATE:
+                                case "BIRTHDATE":
                                     patient.setBirthDate(text.toString());
                                     break;
-                                case ADMISSIONDATE:
+                                case "ADMISSIONDATE":
                                     patient.setAdmissionDate(text.toString());
                                     break;
-                                case DIAGNOSIS:
+                                case "DIAGNOSIS":
                                     patient.setDiagnosis(text.toString());
                                     break;
-                                case TREATMENT:
+                                case "TREATMENT":
                                     patient.setTreatment(text.toString());
                                     break;
-                                case DEPARTMENTID:
+                                case "DEPARTMENTID":
                                     patient.setDepartmentID(Integer.parseInt(text.toString()));
                                     break;
-                                case DOCTORID:
+                                case "DOCTORID":
                                     patient.setDoctorID(Integer.parseInt(text.toString()));
                                     break;
                             }
@@ -163,53 +146,31 @@ public class StAXHandler {
                     }
                     break;
                 case XMLStreamConstants.END_ELEMENT:
-                    try {
-                        entityTag = EntityTag.valueOf(reader.getLocalName().toUpperCase());
-                    } catch (EnumConstantNotPresentException | IllegalArgumentException e) {
-                        continue;
-                    }
-                    switch (entityTag) {
-                        case HOSPITAL:
-                        break;
-                        case DEPARTMENTS:
-                            hospital.setDepartments(departments);
-                            //entityTag = EntityTag.NONE;
-                            break;
-                        case DEPARTMENT:
+                    elementName = reader.getLocalName().toUpperCase();
+                    switch (elementName) {
+                        case "DEPARTMENT":
                             departments.add(department);
-                            department = null;
-                            departmentTag = DepartmentTag.NONE;
+                            entityTag = EntityTag.NONE;
                             break;
-                        case DOCTORS:
-                            hospital.setDoctors(doctors);
-                            //entityTag = EntityTag.NONE;
-                            break;
-                        case DOCTOR:
+                        case "DOCTOR":
                             doctors.add(doctor);
-                            doctor = null;
-                            doctorTag = DoctorTag.NONE;
+                            entityTag = EntityTag.NONE;
                             break;
-                        case NURSES:
-                            hospital.setNurses(nurses);
-                            //entityTag = EntityTag.NONE;
-                            break;
-                        case NURSE:
+                        case "NURSE":
                             nurses.add(nurse);
-                            nurse = null;
-                            nurseTag = NurseTag.NONE;
+                            entityTag = EntityTag.NONE;
                             break;
-                        case PATIENTS:
-                            hospital.setPatients(patients);
-                            //entityTag = EntityTag.NONE;
-                            break;
-                        case PATIENT:
+                        case "PATIENT":
                             patients.add(patient);
-                            patient = null;
-                            patientTag = PatientTag.NONE;
+                            entityTag = EntityTag.NONE;
                             break;
                     }
             }
         }
+        hospital.setDepartments(departments);
+        hospital.setDoctors(doctors);
+        hospital.setNurses(nurses);
+        hospital.setPatients(patients);
         return hospital;
     }
 }

@@ -6,7 +6,7 @@
     <title>MyJSP</title>
 </head>
 <body>
-<form action="HospitalServlet" method="get">
+<form action="hospital" method="get">
     <input type="hidden" name="command" value="forward" />
     Enter path to xml-file:<br/>
     <label>

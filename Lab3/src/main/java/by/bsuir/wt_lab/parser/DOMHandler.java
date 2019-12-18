@@ -76,7 +76,7 @@ public class DOMHandler {
                     doctor = new Doctor();
                     doctor.setID(Integer.parseInt(node.getAttribute("id")));
                     doctor.setName(getTextContent(node, "name"));
-                    doctor.setBirthDate(getTextContent(node, "birthDate"));
+                    doctor.setBirthDate(getTextContent(node, "birthdate"));
                     doctor.setDepartmentID(Integer.parseInt(getTextContent(node, "departmentID")));
                     doctors.add(doctor);
                     doctor = null;
@@ -91,7 +91,7 @@ public class DOMHandler {
                     nurse = new Nurse();
                     nurse.setID(Integer.parseInt(node.getAttribute("id")));
                     nurse.setName(getTextContent(node, "name"));
-                    nurse.setBirthDate(getTextContent(node, "birthDate"));
+                    nurse.setBirthDate(getTextContent(node, "birthdate"));
                     nurse.setDepartmentID(Integer.parseInt(getTextContent(node, "departmentID")));
                     nurses.add(nurse);
                     nurse = null;
@@ -106,8 +106,8 @@ public class DOMHandler {
                     patient = new Patient();
                     patient.setID(Integer.parseInt(node.getAttribute("id")));
                     patient.setName(getTextContent(node, "name"));
-                    patient.setBirthDate(getTextContent(node, "birthDate"));
-                    patient.setAdmissionDate(getTextContent(node, "admissionDate"));
+                    patient.setBirthDate(getTextContent(node, "birthdate"));
+                    patient.setAdmissionDate(getTextContent(node, "admissiondate"));
                     patient.setDiagnosis(getTextContent(node, "diagnosis"));
                     patient.setTreatment(getTextContent(node, "treatment"));
                     patient.setDoctorID(Integer.parseInt(getTextContent(node, "doctorID")));

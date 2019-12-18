@@ -55,6 +55,7 @@ public class HospitalServlet extends HttpServlet {
                 logger.error("Dom parse error", e);
             }
         }
+        request.setCharacterEncoding("UTF-8");
         request.setAttribute("departments", hospital.getDepartments());
         request.setAttribute("doctors", hospital.getDoctors());
         request.setAttribute("nurses", hospital.getNurses());

@@ -11,6 +11,8 @@ import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.helpers.XMLReaderFactory;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -69,9 +71,9 @@ public class SAXHandler extends DefaultHandler {
                 XMLReader xmlReader = XMLReaderFactory.createXMLReader();
                 xmlReader.setContentHandler(instance);
 
-                xmlReader.parse(new InputSource(path));
+                xmlReader.parse(new InputSource(new FileInputStream(path)));
             } catch (SAXException | IOException | NullPointerException e) {
-                logger.error(e.getMessage());
+                logger.error("Ошибка парсинга", path, e);
             }
         }
         return instance;
